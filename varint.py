@@ -13,6 +13,16 @@ try:
 except ImportError:
     from StringIO import StringIO as BytesIO
 
+import sys
+
+if sys.version > '3':
+    def _byte(b):
+        return bytes((b, ))
+else:
+    def _byte(b):
+        return chr(b)
+
+
 def encode(number):
     """Pack `number` into varint bytes"""
     buf = b''
@@ -20,9 +30,9 @@ def encode(number):
         towrite = number & 0x7f
         number >>= 7
         if number:
-            buf += chr(towrite | 0x80)
+            buf += _byte(towrite | 0x80)
         else:
-            buf += chr(towrite)
+            buf += _byte(towrite)
             break
     return buf
 
@@ -34,7 +44,7 @@ def decode_stream(stream):
         i = _read_one(stream)
         result |= (i & 0x7f) << shift
         shift += 7
-        if not i & 80:
+        if not (i & 0x80):
             break
 
     return result
@@ -52,4 +62,4 @@ def _read_one(stream):
     c = stream.read(1)
     if c == '':
         raise EOFError("Unexpected EOF while reading bytes")
-    return ord(stream.read(1))
+    return ord(c)
