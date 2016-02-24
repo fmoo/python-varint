@@ -7,7 +7,7 @@
 from setuptools import setup, find_packages
 
 NAME = 'varint'
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 setup(
     name=NAME,
@@ -19,8 +19,8 @@ setup(
     author_email='ruibalp@gmail.com',
     license='MIT',
     keywords='encoder',
-    url='http://github.com/facebook/sparts',
-    download_url='https://github.com/fmoo/varint/%s.tar.gz' % VERSION,
+    url='http://github.com/fmoo/python-varint',
+    download_url='https://github.com/fmoo/python-varint/%s.tar.gz' % VERSION,
 
     #test_suite="tests",
 
