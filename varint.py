@@ -60,6 +60,6 @@ def _read_one(stream):
     raises EOFError if the stream ends while reading bytes.
     """
     c = stream.read(1)
-    if c == '':
+    if c == b'':
         raise EOFError("Unexpected EOF while reading bytes")
     return ord(c)
